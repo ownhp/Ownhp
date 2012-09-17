@@ -47,7 +47,7 @@ function prompt(params){
     	this.showMessage(loadingMessage);
     	return loadingMessage;
 	};
-	this.close = function(){
+	this.close = function(obj){
 		this.element.unblock({
 			onUnblock : this.onUnblock
 		});

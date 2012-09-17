@@ -1,0 +1,27 @@
+#clock {display:inline-block;width:200px; color:#fff;text-align: center;margin: 0 auto; }
+
+#Clock_Date { display:block;font-size:14px; text-align:center; text-shadow:0 0 5px #00c6ff; margin-left:auto;}
+#clock ul { width:200px; margin:0 auto; padding:0px; list-style:none; text-align:center; }
+#clock ul li { display:inline; font-size:12px; text-align:center; font-family:'BebasNeueRegular', Arial, Helvetica, sans-serif; text-shadow:0 0 5px #00c6ff; }
+
+#clock .point { position:relative; -moz-animation:mymove 1s ease infinite; -webkit-animation:mymove 1s ease infinite; padding-left:10px; padding-right:10px; }
+
+@-webkit-keyframes mymove 
+{
+0% {opacity:1.0; text-shadow:0 0 20px #00c6ff;}
+50% {opacity:0; text-shadow:none; }
+100% {opacity:1.0; text-shadow:0 0 20px #00c6ff; }	
+}
+@-moz-keyframes mymove 
+{
+0% {opacity:1.0; text-shadow:0 0 20px #00c6ff;}
+50% {opacity:0; text-shadow:none; }
+100% {opacity:1.0; text-shadow:0 0 20px #00c6ff; }	
+}
+@media all and (max-width:500px) {
+	#clock{margin-top:10px;width:100px;}
+	#Clock_Date {display:none;}
+	#clock ul{width:100px;}
+	#clock ul li{font-size:18px;}
+	#clock .point {padding:0 2px;}
+}

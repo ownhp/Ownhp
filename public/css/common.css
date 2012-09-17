@@ -1,0 +1,111 @@
+@CHARSET "ISO-8859-1";
+
+* {
+	font-family: Georgia, serif;
+	font-size: 12px;
+	font-style: normal;
+	font-weight: normal;
+	text-transform: normal;
+	letter-spacing: normal;
+	line-height: 1.4em;
+}
+
+a , a img{
+	text-decoration: none;
+	outline: 0 none !important;
+	border: 0px none !important;
+}
+#logo {
+	display: block;
+	float: left;
+}
+
+header#header {
+	background-color: #000000;
+	color: #FFFFFF;
+	box-shadow: 0 2px 3px rgba(0, 0, 0, 0.25);
+	height: 30px;
+	left: 0;
+	margin: 0;
+	padding: 10px;
+	position: fixed;
+	right: 0;
+	top: 0;
+	z-index: 90;
+}
+
+div#content {
+	background: url("../images/default_background.png") transparent;
+	left: 0;
+	margin: 0;
+	padding: 10px;
+	position: fixed;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	margin: 50px 0 30px 0;
+}
+
+footer#footer {
+	font-size: 1em;
+	color: #FFFFFF;
+	background-color: #000000;
+	box-shadow: 0 2px 3px rgba(0, 0, 0, 0.25);
+	height: 20px;
+	min-height: 15px;
+	padding: 5px;
+	left: 0;
+	margin: 0;
+	position: fixed;
+	right: 0;
+	bottom: 0;
+	z-index: 90;
+	left: 0;
+}
+
+.articleBookmark {
+	width: 100px;
+	height: 100px;
+	display: block;
+	float: left;
+	padding-top:10px;
+	margin:10px 0  0 20px;
+	text-align:center;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-khtml-border-radius: 10px;
+    border-radius: 10px;
+}
+.articleBookmark a{
+	color:#000 !important;
+}
+.articleBookmark:hover{
+	color:#FFF !important;
+	background-color: #666;
+}
+.articleBookmark:hover a{
+	color:#FFF !important;
+}
+.articleBookmark img{
+	height:64px;
+	width:64px;
+}
+
+
+/* Media Query For width:700px */
+@media all and (min-width:700px) {
+	header#header aside {
+		width: 700px;
+		display: block;
+		margin: 0 auto;
+	}
+}
+
+/* Media Query For width:1000px */
+@media all and (min-width:1000px) {
+	header#header aside {
+		width: 1000px;
+		display: block;
+		margin: 0 auto;
+	}
+}

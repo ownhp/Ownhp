@@ -1,1 +1,37 @@
-Welcome
+<?php $this->headScript()->appendFile($this->baseUrl("js/bookmark.js"))?>
+<div id="bookmarks" class="touchslider"></div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		// The bookmarkFetchUrl to load the bookmarks
+		var bookmarkFetchUrl = "<?php echo $this->url(array("module"=>"bookmark","controller"=>"index","action"=>"fetch"),"default",true);?>";
+		
+		// Area where the bookmarks needs to be loaded
+		var container = $("#bookmarks");
+		
+		// Template to use the data 
+		var template = $("#tmplBookmark").html();
+
+		// Re-Arrange the icons whenever we resize the window
+		$(window).on("resize",function() {
+			if(window.bookmarks){
+				rearrangeBookmarks(window.bookmarks,container,template);
+			}		
+		});
+		// After loading bookmarks we would rearrange the bookmarks so 
+		// we first defined the window.resize function
+		loadBookmarks(bookmarkFetchUrl,container,template);
+	});
+</script>
+<script type="lodash-template" id="tmplBookmark">	
+	<article class="articleBookmark">
+		<input type="hidden" name="bookmark_id" id="bookmark_id" value="<%= bookmark_id %>" />
+		<a href="<%= url %>" title="<%= title %>" target="_blank">
+			<aside>
+				<img alt="<%= title %>" src="<%= src %>" />
+			</aside>
+			<div class="footerBookmark">
+				<%= title %>
+			</div>
+		</a>
+	</article>
+</script>
