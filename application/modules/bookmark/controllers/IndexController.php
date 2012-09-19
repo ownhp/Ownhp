@@ -1,8 +1,12 @@
 <?php
 class Bookmark_IndexController extends Zend_Controller_Action {
 	private $user = false;
+	private $_acl;
+	private $_auth;
 	public function init() {
 		$this->user = false;
+		$this->_acl = User_Plugin_Acl::getInstance();
+		$this->_auth = Zend_Auth::getInstance();
 	}
 	public function fetchAction() {
 		$bookmarkMapper = new Bookmark_Model_Mapper_Bookmark ();
@@ -10,7 +14,7 @@ class Bookmark_IndexController extends Zend_Controller_Action {
 		
 		$limit = $this->getRequest ()->getParam ( "limit", 100 );
 		$offset = $this->getRequest ()->getParam ( "offset", 0 );
-		if ($this->user) {
+		if ($this->_acl->isAllowed($this->_auth->getStorage()->read()->role, "bookmark","add,edit,delete")) {
 		} else {
 			$select = $bookmarkMapper->getDbTable()
 						->select()

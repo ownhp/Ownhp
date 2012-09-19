@@ -1,7 +1,46 @@
 <?php
 class User_LoginController extends Zend_Controller_Action {
 	public function indexAction() {
-		$this->view->loginForm = new User_Form_UserLogin();
+		$auth = Zend_Auth::getInstance ();
+		$auth->clearIdentity();
+		
+		$loginForm = new User_Form_UserLogin ();
+		if ($this->_request->isPost ()) {
+			if ($loginForm->isValid ( $this->_request->getParams () )) {
+				$userMapper = new User_Model_Mapper_User ();
+				
+				// Get username and password
+				$username = $loginForm->getValue('username');
+				$password = $loginForm->getValue('password');
+				
+				// Get the dbtable and adapter for user
+				$userDbTable = $userMapper->getDbTable();
+				$userAdapter = $userDbTable->getAdapter ();
+				
+				// Where-Quatations for username and password
+				$usernameCondition = $userAdapter->quoteInto ( "username = ?", $username );
+				$passwordCondition = $userAdapter->quoteInto ( "password = ?", $password );
+				
+				// Select statement for the user
+				$select = $userDbTable->select()->where($usernameCondition)->where($passwordCondition);
+				$users = $userMapper->fetchAll ($select);
+				
+				// Check for user validity
+				if($users && count($users)==1){
+					$identity = new stdClass ();
+					$identity->role = "GUEST";
+					
+					$storage = $auth->getStorage ();
+					$storage->write ( $identity );
+					$this->_redirect("/");
+				} else {
+					$this->_helper->json(array("errors"=>array("username"=>"Invalid Username/Password")));
+				}
+			} else {
+				print_r ( $loginForm->getMessages () );
+			}
+		}
+		$this->view->loginForm = $loginForm;
 	}
 	public function facebookAction() {
 		$facebookConfig = new Zend_Config_Ini ( APPLICATION_PATH . "/configs/application.ini", APPLICATION_ENV );

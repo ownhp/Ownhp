@@ -1,7 +1,6 @@
 /**
- * @todo : Optimize the templating to set the foreach
- * in templating instead of using jquery $.each as it
- * complies the template each and every time
+ * @todo : Optimize the templating to set the foreach in templating instead of
+ *       using jquery $.each as it complies the template each and every time
  * 
  * @param bookmarkFetchUrl
  * @param container
@@ -18,7 +17,7 @@ function loadBookmarks(bookmarkFetchUrl, container, template) {
 				promptus = new prompt({
 					reference : this,
 					element : "#content",
-					onUnblock : function(){
+					onUnblock : function() {
 						$(window).trigger("resize");
 					},
 					beforeShow : function() {
@@ -47,6 +46,9 @@ function rearrangeBookmarks(data, container, template) {
 	var windowComputedHeight = $(window).height() - 80;
 	var heightMultiplier = Math.floor(windowComputedHeight
 			/ window.bookmarkHeight);
+
+	// Leave one level of bookmarks as there needs to be adds there
+	heightMultiplier--;
 	windowComputedHeight = heightMultiplier * window.bookmarkHeight;
 
 	// Compute new Window Width

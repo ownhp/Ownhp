@@ -5,25 +5,32 @@
 <?php echo $this->headTitle("Bookmark Management System");?>
 <?php
 
-echo $this->headLink ()->appendStylesheet ( $this->baseUrl ( 'css/common.css' ) )->appendStylesheet ( $this->baseUrl ( 'libs/jqueryui/css/jqueryui.smoothness.custom.css' ) )->appendStylesheet ( $this->baseUrl ( 'css/jquery.tools.css' ) )->appendStylesheet ( $this->baseUrl ( 'libs/Prompt/css/prompt.css' ) )->appendStylesheet ( $this->baseUrl ( 'libs/Clock/css/clock.css' ) );
+echo $this->headLink ()
+->appendStylesheet ( $this->baseUrl ( 'css/common.css' ) )
+->appendStylesheet ( $this->baseUrl ( 'libs/JQueryUi/css/jqueryui.smoothness.custom.css' ) )
+->appendStylesheet ( $this->baseUrl ( 'libs/JQueryTools/css/jquery.tools.css' ) )
+->appendStylesheet ( $this->baseUrl ( 'libs/Prompt/css/prompt.css' ) )
+->appendStylesheet ( $this->baseUrl ( 'libs/Clock/css/clock.css' ) );
+
 echo $this->headScript ()
+->prependFile ( $this->baseUrl ( "libs/Facebook/js/all.js" ) )
 ->prependFile ( $this->baseUrl ( "libs/Resize/js/jquery.resize.min.js" ) )
 ->prependFile ( $this->baseUrl ( "libs/Touchslider/js/touchslider.min.js" ) )
-->prependFile ( $this->baseUrl ( "js/lodash.min.js" ) )
+->prependFile ( $this->baseUrl ( "libs/Lodash/js/lodash.min.js" ) )
 ->prependFile ( $this->baseUrl ( "libs/Clock/js/clock.js" ) )
 ->prependFile ( $this->baseUrl ( "libs/Prompt/js/prompt.js" ) )
-->prependFile ( $this->baseUrl ( "libs/jqueryui/js/jqueryui.smoothness.min.js" ) )
-->prependFile ( $this->baseUrl ( "js/jquery.tools.min.js" ) )
-->prependFile ( $this->baseUrl ( "libs/blockUI/jquery.blockUI.js" ) )
-->prependFile ( $this->baseUrl ( "js/ajaxfileupload.js" ) )
-->prependFile ( $this->baseUrl ( "js/jquery-1.8.0.min.js" ) )
-->prependFile ( $this->baseUrl ( 'libs/html5/html5.js' ), 'text/javascript', array ('conditional' => 'lt IE 9') );
+->prependFile ( $this->baseUrl ( "libs/JQueryUi/js/jqueryui.smoothness.min.js" ) )
+->prependFile ( $this->baseUrl ( "libs/JQueryTools/js/jquery.tools.min.js" ) )
+->prependFile ( $this->baseUrl ( "libs/BlockUI/jquery.blockUI.js" ) )
+->prependFile ( $this->baseUrl ( "libs/AjaxFileUpload/js/ajaxfileupload.js" ) )
+->prependFile ( $this->baseUrl ( "libs/Jquery/js/jquery-1.8.0.min.js" ) )
+->prependFile ( $this->baseUrl ( 'libs/Html5/js/html5.js' ), 'text/javascript', array ('conditional' => 'lt IE 9') );
 ?>
 </head>
 <body>
 	<!-- FB Share Initialize -->
 	<div id='fb-root'></div>
-    <script src='http://connect.facebook.net/en_US/all.js'></script>
+    <!-- <script src='http://connect.facebook.net/en_US/all.js'></script> -->
     <script type="text/javascript">
     	//<![CDATA[
 		window.fbAsyncInit = function() {
@@ -47,7 +54,8 @@ echo $this->headScript ()
         		} else {
         			//alert('Post was not published.');
         		}
-        	});*/
+        	});
+        	*/
 		}
 		//]]>
     </script>
