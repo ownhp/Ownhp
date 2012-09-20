@@ -8,13 +8,6 @@ class Default_IndexController extends Zend_Controller_Action {
 		$this->_auth = Zend_Auth::getInstance ();
 	}
 	public function indexAction() {
-		// action body
-		if ($this->_acl->isAllowed ( $this->_auth->getStorage ()->read ()->role, "bookmark","delete,view")) {
-			echo "ALLOWED";
-		} else {
-			echo "benchod";
-		}
-		die ();
 	}
 }
 
