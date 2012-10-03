@@ -1,20 +1,24 @@
 <?php
-class User_LoginController extends Zend_Controller_Action {
+class User_LoginController extends Standard_Controller_Action {
+	public function init(){
+		parent::init();
+		if(!$this->_acl->isAllowed($this->_user->role,"login")){
+			$this->_redirect("/");
+		}
+	}
 	public function indexAction() {
-		$auth = Zend_Auth::getInstance ();
-		$auth->clearIdentity();
-		
 		$loginForm = new User_Form_UserLogin ();
 		if ($this->_request->isPost ()) {
 			if ($loginForm->isValid ( $this->_request->getParams () )) {
+				
 				$userMapper = new User_Model_Mapper_User ();
 				
 				// Get username and password
-				$username = $loginForm->getValue('username');
-				$password = $loginForm->getValue('password');
+				$username = $loginForm->getValue ( 'username' );
+				$password = $loginForm->getValue ( 'password' );
 				
 				// Get the dbtable and adapter for user
-				$userDbTable = $userMapper->getDbTable();
+				$userDbTable = $userMapper->getDbTable ();
 				$userAdapter = $userDbTable->getAdapter ();
 				
 				// Where-Quatations for username and password
@@ -22,19 +26,21 @@ class User_LoginController extends Zend_Controller_Action {
 				$passwordCondition = $userAdapter->quoteInto ( "password = ?", $password );
 				
 				// Select statement for the user
-				$select = $userDbTable->select()->where($usernameCondition)->where($passwordCondition);
-				$users = $userMapper->fetchAll ($select);
+				$select = $userDbTable->select ()->where ( $usernameCondition )->where ( $passwordCondition );
+				$users = $userMapper->fetchAll ( $select );
 				
 				// Check for user validity
-				if($users && count($users)==1){
-					$identity = new stdClass ();
-					$identity->role = "GUEST";
-					
-					$storage = $auth->getStorage ();
+				if ($users && count ( $users ) == 1) {
+					$identity = (object)$users[0]->toArray();
+					$storage = $this->_auth->getStorage ();
 					$storage->write ( $identity );
-					$this->_redirect("/");
+					$this->_redirect ( "/" );
 				} else {
-					$this->_helper->json(array("errors"=>array("username"=>"Invalid Username/Password")));
+					$this->_helper->json ( array (
+							"errors" => array (
+									"username" => "Invalid Username/Password" 
+							) 
+					) );
 				}
 			} else {
 				print_r ( $loginForm->getMessages () );

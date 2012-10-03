@@ -1,5 +1,5 @@
 <?php
-class Bookmark_Model_Bookmark extends Standard_Model {
+class Bookmark_Model_Bookmark extends Standard_Model_Model {
 	private $_bookmark_id;
 	private $_title;
 	private $_url;

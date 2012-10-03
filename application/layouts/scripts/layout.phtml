@@ -5,26 +5,40 @@
 <?php echo $this->headTitle("Bookmark Management System");?>
 <?php
 
-echo $this->headLink ()->appendStylesheet ( $this->baseUrl ( 'css/common.css' ) )->appendStylesheet ( $this->baseUrl ( 'libs/JQueryUi/css/jqueryui.smoothness.custom.css' ) )->appendStylesheet ( $this->baseUrl ( 'libs/JQueryTools/css/jquery.tools.css' ) )->appendStylesheet ( $this->baseUrl ( 'libs/Prompt/css/prompt.css' ) )->appendStylesheet ( $this->baseUrl ( 'libs/Clock/css/clock.css' ) );
+echo $this->headLink ()
+->appendStylesheet ( $this->baseUrl ( 'css/common.css' ) )
+->appendStylesheet ( $this->baseUrl ( 'libs/JQueryUi/css/jqueryui.smoothness.custom.css' ) )
+->appendStylesheet ( $this->baseUrl ( 'libs/JQueryTools/css/jquery.tools.css' ) )
+->appendStylesheet ( $this->baseUrl ( 'libs/Prompt/css/prompt.css' ) )
+->appendStylesheet ( $this->baseUrl ( 'libs/Clock/css/clock.css' ) );
 
-echo $this->headScript ()->prependFile ( $this->baseUrl ( "libs/Facebook/js/all.js" ) )->prependFile ( $this->baseUrl ( "libs/Resize/js/jquery.resize.min.js" ) )->prependFile ( $this->baseUrl ( "libs/Touchslider/js/touchslider.min.js" ) )->prependFile ( $this->baseUrl ( "libs/Lodash/js/lodash.min.js" ) )->prependFile ( $this->baseUrl ( "libs/Clock/js/clock.js" ) )->prependFile ( $this->baseUrl ( "libs/Prompt/js/prompt.js" ) )->prependFile ( $this->baseUrl ( "libs/JQueryUi/js/jqueryui.smoothness.min.js" ) )->prependFile ( $this->baseUrl ( "libs/JQueryTools/js/jquery.tools.min.js" ) )->prependFile ( $this->baseUrl ( "libs/BlockUI/jquery.blockUI.js" ) )->prependFile ( $this->baseUrl ( "libs/AjaxFileUpload/js/ajaxfileupload.js" ) )->prependFile ( $this->baseUrl ( "libs/Jquery/js/jquery-1.8.1.min.js" ) )->prependFile ( $this->baseUrl ( 'libs/Html5/js/html5.js' ), 'text/javascript', array (
-		'conditional' => 'lt IE 9' 
-) );
+echo $this->headScript ()
+->prependFile ( $this->baseUrl ( "libs/Facebook/js/all.js" ) )
+->prependFile ( $this->baseUrl ( "libs/Resize/js/jquery.resize.min.js" ) )
+->prependFile ( $this->baseUrl ( "libs/Touchslider/js/touchslider.min.js" ) )
+->prependFile ( $this->baseUrl ( "libs/Lodash/js/lodash.min.js" ) )
+->prependFile ( $this->baseUrl ( "libs/Clock/js/clock.js" ) )
+->prependFile ( $this->baseUrl ( "libs/Prompt/js/prompt.js" ) )
+->prependFile ( $this->baseUrl ( "libs/JQueryUi/js/jqueryui.smoothness.min.js" ) )
+->prependFile ( $this->baseUrl ( "libs/JQueryTools/js/jquery.tools.min.js" ) )
+->prependFile ( $this->baseUrl ( "libs/BlockUI/jquery.blockUI.js" ) )
+->prependFile ( $this->baseUrl ( "libs/AjaxFileUpload/js/ajaxfileupload.js" ) )
+->prependFile ( $this->baseUrl ( "libs/JQuery/js/jquery-1.8.2.min.js" ) )
+->prependFile ( $this->baseUrl ( 'libs/Html5/js/html5.js' ), 'text/javascript', array ('conditional' => 'lt IE 9') );
 ?>
 </head>
 <body>
 	<!-- FB Share Initialize -->
 	<div id='fb-root'></div>
-	<!-- <script src='http://connect.facebook.net/en_US/all.js'></script> -->
-	<script type="text/javascript">
+    <!-- <script src='http://connect.facebook.net/en_US/all.js'></script> -->
+    <script type="text/javascript">
     	//<![CDATA[
 		window.fbAsyncInit = function() {
 			FB.init({
 				appId  : '179414048860819',
-				//status : true, // check login status
+				status : true, // check login status
 				cookie : true, // enable cookies to allow the server to access the session
-				xfbml  : true, // parse XFBML
-				loggin : true
+				xfbml  : true  // parse XFBML
 			});
 			// Sharing in Facebook
     		/*FB.ui({
@@ -32,12 +46,6 @@ echo $this->headScript ()->prependFile ( $this->baseUrl ( "libs/Facebook/js/all.
         		display: 'dialog',
         		link: "<?php echo urlencode($this->serverUrl().$this->url());?>",
         		name: "Ownhp",
-        		caption: 'The Facebook Connect JavaScript SDK',
-      	      	description: (
-      	      		'A small JavaScript library that allows you to harness ' +
-      	      		'the power of Facebook, bringing the user\'s identity, ' +
-      	      		'social graph and distribution power to your site.'
-      	   		),
         		description: "This is a worderfull app to go with"
         	},
         	function(response) {
@@ -46,30 +54,9 @@ echo $this->headScript ()->prependFile ( $this->baseUrl ( "libs/Facebook/js/all.
         		} else {
         			//alert('Post was not published.');
         		}
-        	});*/
-
-        	// Login with FB
-			/*FB.login(function(response) {
-				if (response.authResponse) {
-					alert('Welcome!  Fetching your information.... ');
-					FB.api('/me', function(response) {
-						alert('Good to see you, ' + response.name + '.');
-					});
-				} else {
-					alert('User cancelled login or did not fully authorize.');
-				}
-			},{scope : "user_about_me,email,manage_notifications"});
-			*/
+        	});
+        	*/
 		}
-		// Loading FacebookSDK Asynchronously
-		(function(d){
-			var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
-			if (d.getElementById(id)) {return;}
-			js = d.createElement('script'); js.id = id; js.async = true;
-			js.src = "//connect.facebook.net/en_US/all.js";
-			ref.parentNode.insertBefore(js, ref);
-		}(document));
-		 
 		//]]>
     </script>
 	<div id="wrapper">
@@ -92,11 +79,25 @@ echo $this->headScript ()->prependFile ( $this->baseUrl ( "libs/Facebook/js/all.
 						<li id="sec"></li>
 					</ul>
 				</div>
-
-				<nav id="top-nav">
-					<ul>
-					</ul>
-				</nav>
+				<?php 
+					if($this->user->role == "GUEST"){
+						?>
+						<div id="divHeaderLogin">
+							<a class = "pr" href="<?php echo $this->url(array("module"=>"user","controller"=>"login","action"=>"index"),"default",true);?>">Login</a>
+							<a class = "pl" href="javascript:void(0);">Join</a>
+						</div>
+						<?php	
+					} else {
+						?>
+						<div id="divHeaderLogin">
+							<a class="pr" href="<?php echo $this->url(array("module"=>"user","controller"=>"logout","action"=>"index"),"default",true);?>">Logout</a>
+						</div>
+						<div id="divAddBookmark">
+							<a class = "add_bookmark" href="#" >&nbsp;</a>
+						</div>
+						<?php
+					}
+				?>
 			</aside>
 			<div style="clear: both;"></div>
 		</header>
@@ -112,5 +113,8 @@ echo $this->headScript ()->prependFile ( $this->baseUrl ( "libs/Facebook/js/all.
 		<!-- #footer -->
 	</div>
 	<!-- #wrapper -->
+	<div id="customBackground">
+		<img src="<?php echo $this->baseUrl("/images/default_iphone.jpg");?>" alt="Background Image" />
+	</div>
 </body>
 </html>

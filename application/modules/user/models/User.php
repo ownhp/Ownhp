@@ -1,5 +1,5 @@
 <?php
-class User_Model_User extends Standard_Model {
+class User_Model_User extends Standard_Model_Model {
 	private $_user_id;
 	private $_username;
 	private $_password;

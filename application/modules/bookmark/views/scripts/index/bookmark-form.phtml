@@ -1,0 +1,46 @@
+<div id="divManageBookmark">
+	<form id="<?php echo $this->element->getId();?>"
+		action="<?php echo $this->element->getAction();?>"
+		method="<?php echo $this->element->getMethod();?>"
+		enctype="<?php echo $this->element->getEnctype()?>">
+		<?php
+			echo $this->element->bookmark_id->renderViewHelper();
+			echo $this->element->image_path->renderViewHelper();
+		?>
+		<table class="zend_form">
+			<tbody>
+				<tr>
+					<td><?php echo $this->element->title->renderLabel();?></td>
+					<td><?php echo $this->element->title->renderViewHelper();?></td>
+				</tr>
+				<tr>
+					<td><?php echo $this->element->description->renderLabel();?></td>
+					<td><?php echo $this->element->description->renderViewHelper();?></td>
+				</tr>
+				<tr>
+					<td><?php echo $this->element->url->renderLabel();?></td>
+					<td><?php echo str_replace("text", "url", $this->element->url->renderViewHelper());?></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td style="vertical-align: middle;">
+						<fieldset style="height:85px;text-align: center">
+							<legend>Thumbnail Preview</legend>
+							<img src="" alt="" id="bookmarkPreview" style="height:75px;width:100px;display:none;" />
+						</fieldset>
+					</td>
+				</tr>
+				<tr>
+					<td>&nbsp;</td>
+					<td>
+						<?php
+							echo $this->element->submit->renderViewHelper();
+							echo $this->element->reset->renderViewHelper();
+						?>
+					</td>
+					<td>&nbsp;</td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+</div>

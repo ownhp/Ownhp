@@ -1,5 +1,16 @@
 <?php
-class User_LogoutController extends Zend_Controller_Action {
+class User_LogoutController extends Standard_Controller_Action {
+	public function init(){
+		parent::init();
+		if(!$this->_acl->isAllowed($this->_user->role,"logout")){
+			$this->_redirect("/");
+		}
+	}
+	public function indexAction(){
+		$auth = Zend_Auth::getInstance ();
+		$auth->clearIdentity();
+		$this->_redirect("/");
+	}
 	public function facebookAction(){
 		$facebookSession = new Zend_Session_Namespace('facebook');
 		$facebookConfig = new Zend_Config_Ini(APPLICATION_PATH."/configs/application.ini",APPLICATION_ENV);

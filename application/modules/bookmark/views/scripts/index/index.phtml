@@ -1,1 +1,155 @@
-Welcome
+<?php
+	$this->headScript()->appendFile($this->baseUrl("js/bookmark.js"))
+			->appendFile("http://bubble.websnapr.com/bAXg9zw18386/swi/");
+?>
+<div id="bookmarks" class="touchslider"></div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		// The bookmarkFetchUrl to load the bookmarks
+		var bookmarkFetchUrl = "<?php echo $this->url(array("module"=>"bookmark","controller"=>"index","action"=>"fetch"),"default",true);?>";
+		
+		// Area where the bookmarks needs to be loaded
+		var container = $("#bookmarks");
+		
+		// Template to use the data 
+		var template = $("#tmplBookmark").html();
+
+		// Re-Arrange the icons whenever we resize the window
+		$(window).on("resize",function() {
+			if(window.bookmarks){
+				rearrangeBookmarks(window.bookmarks,container,template);
+			}		
+		});
+		// After loading bookmarks we would rearrange the bookmarks so 
+		// we first defined the window.resize function
+		loadBookmarks(bookmarkFetchUrl,container,template);
+	});
+</script>
+<script type="lodash-template" id="tmplBookmark">
+	<%
+		// Initialize the Variables in template 
+		bookmark_id = typeof(bookmark_id) == "undefined" ? "" : bookmark_id;
+		url	= typeof(url) == "undefined" ? "javascript:void(0);" : url;
+		customClass = typeof(customClass) == "undefined" ? "" : customClass;
+	%>	
+	<article class="articleBookmark <%= customClass %>">
+		<%
+			if(typeof(user_id) != "undefined"){
+				%>
+					<a href="javascript:void(0);"><aside class="edit" title="Edit"></aside></a>
+					<a href="javascript:void(0);"><aside class="delete" title="Delete"></aside></a>
+					<input type="hidden" name="user_id" value="<%= user_id %>" />
+				<%
+			}
+		%>
+		<input type="hidden" name="bookmark_id" value="<%= bookmark_id %>" />
+		<a href="<%= url %>" title="<%= title %>" target="_blank">
+			<aside>
+				<img style="width:64px;height:64px;" alt="<%= title %>" src="<%= path %>" />
+			</aside>
+			<div class="footerBookmark">
+				<% var title = title.length > 30?(title.substr(0,27) + "..."):title; %>
+				<%= title %>
+			</div>
+		</a>
+	</article>
+</script>
+
+<?php
+	/** 
+	 * Handle the Login Form Schema
+	 */
+?>
+<div id="divAddEditBookmark" title="Bookmark" style="display: none">
+<?php 
+	echo $this->frmBookmark;
+?>
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+
+		// Click the add bookmark button
+		$(document).on("click",".add_bookmark",function(e){
+			if(!e.isDefaultPrevented()){
+				//Convert the button element of the forms as per the style
+				$("#divAddEditBookmark input[type=submit],#divAddEditBookmark input[type=reset]").button();
+
+				// before opening the dialog reset the bookmark form
+				$("#frmBookmark").find("input[type=text],input[type=url] ,textarea").val("");
+				$("#bookmarkPreview").hide();
+				
+				// Open the dialog for add edit bookmark
+				$("#divAddEditBookmark").dialog({
+					modal:true,
+					resizable:false,
+					position:"center",
+					title: "Add Bookmark",
+					draggable : false,
+					close : function(){
+						$('div.error').hide();
+					}
+				});
+				e.preventDefault();
+			}
+		});
+
+		// On submitting add bookmark form
+		$("#frmBookmark").validator().submit(function(e){
+			var frmBookmark = this;
+			if(!e.isDefaultPrevented()){
+				var promptus = false;
+				$(document).queue(function(next){
+					promptus = new prompt({
+		            	reference : frmBookmark,
+		                element : "div[role=dialog]",
+		                beforeShow : function(){
+			                this.alternateMessage = this.showLoadingMessage("Saving..");
+		                }
+		            });
+		            next();
+				}).queue(function(next){
+					$("#image_path").attr("value",$("#bookmarkPreview").attr("src"));
+					$.ajax({
+						url : "<?php echo $this->url(array("module"=>"bookmark","controller"=>"index","action"=>"add"),"default",true);?>",
+						cache: false,
+						data : $(frmBookmark).serialize(),
+						dataType: "json",
+						type: "post",
+						success: function(response){
+							console.log(response);
+						}
+					}).complete(function(){
+						$("#divAddEditBookmark").dialog('destroy');
+						next();
+					});
+				}).queue(function(next){
+					promptus.close();
+					next();
+				});
+				
+				e.preventDefault();
+			}
+		});
+
+		// The generic thumbnail url
+		var thumbnailBaseUrl = "<?php echo $this->bitpixels['api']['baseUrl'].
+											"code=".$this->bitpixels['api']['code'].
+											"&size=".$this->bitpixels['api']['defaultSize'].
+											"&url=";?>";
+											
+		// Remove the image on resetting the form
+		$("#frmBookmark").on("reset",function(){
+			$("#bookmarkPreview").hide();
+		});
+
+		// Change the preview on changing the url
+		$("input[type=url]").on("change",function(){
+			if($(this).val()!=""){
+				$("#bookmarkPreview").attr("src",thumbnailBaseUrl+$(this).val());
+				$("#bookmarkPreview").show();
+			} else {
+				$("#bookmarkPreview").hide();
+			}
+		});
+	});
+</script>

@@ -24,12 +24,22 @@
 </script>
 <script type="lodash-template" id="tmplBookmark">	
 	<article class="articleBookmark">
-		<input type="hidden" name="bookmark_id" id="bookmark_id" value="<%= bookmark_id %>" />
+		<%
+			if(typeof(user_id) != "undefined"){
+				%>
+					<a href="javascript:void(0);"><aside class="edit" title="Edit"></aside></a>
+					<a href="javascript:void(0);"><aside class="delete" title="Delete"></aside></a>
+					<input type="hidden" name="user_id" value="<%= user_id %>" />
+				<%
+			}
+		%>
+		<input type="hidden" name="bookmark_id" value="<%= bookmark_id %>" />
 		<a href="<%= url %>" title="<%= title %>" target="_blank">
 			<aside>
-				<img alt="<%= title %>" src="<%= src %>" />
+				<img alt="<%= title %>" src="<%= path %>" />
 			</aside>
 			<div class="footerBookmark">
+				<% var title = title.length > 30?(title.substr(0,27) + "..."):title; %>
 				<%= title %>
 			</div>
 		</a>

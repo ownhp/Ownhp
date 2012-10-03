@@ -1,5 +1,5 @@
 <?php
-abstract class Standard_ModelMapper implements Standard_MapperStandards {
+abstract class Standard_Model_Mapper_Mapper implements Standard_Model_Mapper_MapperStandards {
 	protected $_dbTableClass = "";
 	protected $_modelClass = "";
 	protected $_dbTable;
@@ -446,7 +446,7 @@ abstract class Standard_ModelMapper implements Standard_MapperStandards {
 		if ($models) {
 			foreach ( $models as $model ) {
 				$record = array ();
-				$model = $model instanceof Standard_Model ? $model->toArray () : $model;
+				$model = $model instanceof Standard_Model_Model ? $model->toArray () : $model;
 				foreach ( $columns as $column ) {
 					if (isset ( $options ["column"] ) && isset ( $options ["column"] ["id"] ) && in_array ( $column, $options ["column"] ["id"] )) {
 						$record [] = $model;

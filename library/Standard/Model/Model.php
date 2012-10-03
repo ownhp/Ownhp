@@ -1,5 +1,5 @@
 <?php
-abstract class Standard_Model {
+abstract class Standard_Model_Model {
 	protected $_class_vars;
 	protected $_reflection_properties;
 	protected $_mapperClass = "";

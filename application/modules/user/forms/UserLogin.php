@@ -44,7 +44,7 @@ class User_Form_UserLogin extends Zend_Form {
 				) 
 		) );
 		$usernameExists->setMessage ( "Invalid Username", Zend_Validate_Db_RecordExists::ERROR_NO_RECORD_FOUND );
-		$username->addValidator($usernameExists);
+		$username->addValidator ( $usernameExists );
 		$this->addElement ( $username );
 		
 		// Password

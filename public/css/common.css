@@ -1,20 +1,26 @@
 @CHARSET "ISO-8859-1";
 
+@font-face {
+    font-family: 'Bookmarks';
+    src: url('fonts/bookmarks/bookmark.eot');
+    src: url('fonts/bookmarks/bookmark.eot') format('embedded-opentype'),
+         url('fonts/bookmarks/bookmark.woff') format('woff'),
+         url('fonts/bookmarks/bookmark.ttf') format('truetype'),
+         url('fonts/bookmarks/bookmark.svg#LamebrainBRKRegular') format('svg');
+}
 * {
-	font-family: Georgia, serif;
-	font-size: 12px;
 	font-style: normal;
-	font-weight: normal;
 	text-transform: normal;
 	letter-spacing: normal;
 	line-height: 1.4em;
 }
 
-a , a img{
+a,a img {
 	text-decoration: none;
 	outline: 0 none !important;
 	border: 0px none !important;
 }
+
 #logo {
 	display: block;
 	float: left;
@@ -34,8 +40,15 @@ header#header {
 	z-index: 90;
 }
 
+#wrapper{
+	font-family: Georgia, serif;
+	font-size: 12px;
+	font-weight: normal;
+}
 div#content {
-	background: url("../images/default_background.png") transparent;
+	font-family: Bookmarks;
+	font-size:16px;
+	/*background: url("../images/default_background.png") transparent;*/
 	left: 0;
 	margin: 0;
 	padding: 10px;
@@ -68,30 +81,126 @@ footer#footer {
 	height: 100px;
 	display: block;
 	float: left;
-	padding-top:10px;
-	margin:10px 0  0 20px;
-	text-align:center;
+	padding-top: 10px;
+	margin: 10px 0 0 30px;
+	text-align: center;
 	-moz-border-radius: 10px;
 	-webkit-border-radius: 10px;
 	-khtml-border-radius: 10px;
-    border-radius: 10px;
-}
-.articleBookmark a{
-	color:#000 !important;
-}
-.articleBookmark:hover{
-	color:#FFF !important;
-	background-color: #666;
-}
-.articleBookmark:hover a{
-	color:#FFF !important;
-}
-.articleBookmark img{
-	height:64px;
-	width:64px;
+	border-radius: 10px;
 }
 
+.articleBookmark a {
+	color: #000 !important;
+}
 
+.articleBookmark:hover {
+	color: #FFF !important;
+	background-color: #000;
+	opacity: 0.7;
+	filter: alpha(opacity=70);
+}
+
+.articleBookmark:hover a {
+	color: #FFF !important;
+}
+
+.articleBookmark img {
+	height: 64px;
+	width: 64px;
+}
+
+.articleBookmark .delete {
+	display: none;
+	float: right;
+	height: 24px;
+	width: 24px;
+	margin-top: -20px;
+	margin-right: -12px;
+}
+
+.articleBookmark:hover .delete {
+	display: block;
+	background-image: url("../images/bookmark_delete.png");
+}
+
+.articleBookmark .edit {
+	display: none;
+	float: left;
+	height: 24px;
+	width: 24px;
+	margin-top: -20px;
+	margin-left: -12px;
+}
+
+.articleBookmark:hover .edit {
+	display: block;
+	background-image: url("../images/bookmark_edit.png");
+}
+
+.error {
+	z-index: 1100;
+	padding-top: 0px !important;
+}
+
+.error p {
+	line-height: 0;
+	padding: 0;
+}
+#divAddBookmark{
+	float:right;
+	margin-right:10px;
+}
+a.add_bookmark{
+	display:block;
+	height:32px;
+	width:32px;	
+	background: url("../images/default_bookmark_add.png");
+}
+
+#divHeaderLogin {
+	padding-top:7px;
+	float: right;
+}
+
+#divHeaderLogin a,#divHeaderLogin a:visited,#divHeaderLogin a:hover, #divHeaderLogin a:active {
+	text-decoration: none;
+	font-size: 12px;
+	cursor: pointer;
+	font-weight: bold;
+}
+
+.pr {
+	-moz-transition: color 0.5s ease 0s;
+	color: #3390E6;
+	margin-right: 20px;
+	text-shadow: -1px 0 rgba(0, 0, 0, 0.25), 0 -1px rgba(0, 0, 0, 0.25), 0
+		1px rgba(255, 255, 255, 0.25), -1px -1px rgba(0, 0, 0, 0.3);
+}
+
+.pl {
+	-moz-transition: color 2s ease 0s;
+	color: #FFFFFF;
+	text-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+}
+.pl:hover{
+	color: #3390E6;
+}
+/**
+	Iphone specific changes
+**/
+
+#customBackground img{
+	display:block;
+	position:fixed;
+	height:100%;
+	width:100%;
+	top:0;
+	left: 0;
+	opacity: 0.3;
+	filter: alpha(opacity=30);
+	z-index:-1;
+}
 /* Media Query For width:700px */
 @media all and (min-width:700px) {
 	header#header aside {
